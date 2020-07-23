@@ -1,8 +1,17 @@
 import React from "react";
+import API from "../../utils/API"
 
 
-function Employee(props) {
-    return (
+    export default class Employee extends React.Component {
+        state = {users:[]}
+        componentDidMount() {
+            API.getUsers().then(results => {
+              this.setState({
+                users: results.data.results,
+                filteredUsers: results.data.results
+              }); console.log (results)            });
+          }    
+        render (){ return (
         <div className="container">
             <div>
                 <table className="table table-bordered">
@@ -15,17 +24,19 @@ function Employee(props) {
                         </tr>
                     </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">photo</th>
-                                    <td>Firstname Lastname</td>
-                                    <td>###-###-####</td>
-                                    <td>email@email.com</td>
-                                </tr>
+                               {this.state.users.forEach(user => {
+                                   return( 
+                                   <tr>
+                                        <th scope="row">photo</th>
+                                        <td>Firstname Lastname</td>
+                                        <td>###-###-####</td>
+                                        <td>email@email.com</td>
+                                    </tr>)})
+        }  
                             </tbody>
                 </table>
             </div>
         </div>
     )
-}
+    }}
 
-export default Employee;
