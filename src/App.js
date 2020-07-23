@@ -1,44 +1,23 @@
 import React from 'react';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Jumbotron from './components/Jumbotron/Jumbotron';
+import Employee from './components/Employee/Employee';
+import Wrapper from './components/Wrapper';
+import SearchBar from './components/Searchbar/SearchBar';
 
-import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Employee Picture</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Email</th>
-      <th scope="col">Phone Number</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>JT@email.com</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
-    </div>
+    <Router>
+        <div>
+          <Jumbotron />
+          <SearchBar />
+          <br />
+          <Wrapper>
+          <Route exact path="/" component={Employee} />
+          </Wrapper>
+        </div>
+    </Router>
   );
 }
 
