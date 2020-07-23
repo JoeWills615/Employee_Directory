@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState,useEffect} from "react";
+import API from "./utils/API"
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Jumbotron from './components/Jumbotron/Jumbotron';
 import Employee from './components/Employee/Employee';
@@ -7,6 +8,21 @@ import SearchBar from './components/Searchbar/SearchBar';
 
 
 function App() {
+  const [employees, setEmployees] = useState([])
+useEffect(() => {
+    API.getUsers()
+    .then((res) => {
+      if(!employees.length){
+        setEmployees(res.data.results)
+        console.log (employees)
+      }
+       
+    })
+    .catch(err => {
+      console.log (err)
+    })
+   
+},[employees, setEmployees])
   return (
     <Router>
         <div>
@@ -14,7 +30,7 @@ function App() {
           <SearchBar />
           <br />
           <Wrapper>
-          <Route exact path="/" component={Employee} />
+          <Employee users={employees}/>
           </Wrapper>
         </div>
     </Router>
